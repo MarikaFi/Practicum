@@ -2,23 +2,23 @@ package ru.praktikum.selenium;
 
 import io.github.bonigarcia.wdm.WebDriverManager;
 import org.junit.After;
+import org.junit.Assert;
 import org.junit.Test;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
-import pageobjects.MainPage;
-import pageobjects.OrderFormPage;
-import pageobjects.RentFormPage;
+import org.openqa.selenium.chrome.ChromeDriver;
+import ru.praktikum.selenium.page_objects.MainPage;
+import ru.praktikum.selenium.page_objects.OrderFormPage;
+import ru.praktikum.selenium.page_objects.RentFormPage;
 
 import java.util.concurrent.TimeUnit;
 
 import static ru.praktikum.selenium.config.AppConfig.APP_URL;
 
 
-
-    @RunWith(Parameterized.class)
-    public class OrderTest {
+@RunWith(Parameterized.class)
+    public class OrderTest{
 
         WebDriver webDriver;
         private final String firstName;
@@ -49,7 +49,6 @@ import static ru.praktikum.selenium.config.AppConfig.APP_URL;
 
         @Test
         public void testOrderUpperOrderButton() {
-
             WebDriverManager.chromedriver().setup();
             webDriver = new ChromeDriver();
             webDriver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
@@ -58,6 +57,7 @@ import static ru.praktikum.selenium.config.AppConfig.APP_URL;
             webDriver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
 
             MainPage mainPage = new MainPage(webDriver);
+            mainPage.clickCookieButton();
             mainPage.clickUpperOrderButton();
 
             OrderFormPage orderPage = new OrderFormPage(webDriver);
@@ -65,14 +65,12 @@ import static ru.praktikum.selenium.config.AppConfig.APP_URL;
 
             RentFormPage rentPage = new RentFormPage(webDriver);
             rentPage.rent(startDate, comment);
-            rentPage.clickYESButton();
-            rentPage.waitModalWindow();
-            rentPage.checkModalWindow();
+
+            Assert.assertTrue(rentPage.checkOrderWindow());
         }
 
         @Test
         public void testOrderLowerOrderButton() {
-
             WebDriverManager.chromedriver().setup();
             webDriver = new ChromeDriver();
             webDriver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
@@ -81,6 +79,7 @@ import static ru.praktikum.selenium.config.AppConfig.APP_URL;
             webDriver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
 
             MainPage mainPage = new MainPage(webDriver);
+            mainPage.clickCookieButton();
             mainPage.clickLowerOrderButton();
 
             OrderFormPage orderPage = new OrderFormPage(webDriver);
@@ -88,9 +87,8 @@ import static ru.praktikum.selenium.config.AppConfig.APP_URL;
 
             RentFormPage rentPage = new RentFormPage(webDriver);
             rentPage.rent(startDate, comment);
-            rentPage.clickYESButton();
-            rentPage.waitModalWindow();
-            rentPage.checkModalWindow();
+
+            Assert.assertTrue(rentPage.checkOrderWindow());
         }
 
         @After

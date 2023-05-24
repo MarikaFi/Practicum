@@ -7,7 +7,7 @@ import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
-import pageobjects.MainPage;
+import ru.praktikum.selenium.page_objects.MainPage;
 import org.junit.Assert;
 import org.openqa.selenium.By;
 

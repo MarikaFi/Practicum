@@ -1,4 +1,4 @@
-package pageobjects;
+package ru.praktikum.selenium.page_objects;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -11,6 +11,7 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 public class MainPage {
 
     private final WebDriver driver;
+    private final By cookieButton = By.id("rcc-confirm-button");
     private final By upperOrderButton = By.className("Button_Button__ra12g");
     private final By lowerOrderButton = By.xpath(".//button[(@class ='Button_Button__ra12g Button_Middle__1CSJM' and text()='Заказать')]");
 
@@ -35,6 +36,10 @@ public class MainPage {
             "accordion__panel-7"};
     public MainPage(WebDriver driver) {
         this.driver = driver;
+    }
+
+    public void clickCookieButton() {
+        driver.findElement(cookieButton).click();
     }
     public void clickUpperOrderButton() {
         driver.findElement(upperOrderButton).click();

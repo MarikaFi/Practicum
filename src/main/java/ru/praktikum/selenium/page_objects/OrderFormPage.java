@@ -1,4 +1,4 @@
-package pageobjects;
+package ru.praktikum.selenium.page_objects;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
